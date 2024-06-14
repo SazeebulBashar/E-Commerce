@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from .products import products
+from .models import (Product, Order, OrderItem, ShippingAddress, Review)
+from .serializers import (ProductSerializer)
 
 # Rest framework
 from rest_framework.decorators import api_view
@@ -15,13 +16,13 @@ def getRoutes(request):
 
 @api_view(['GET'])
 def getProducts(request):
-    return Response(products)
+    product = Product.objects.all()
+    serializer = ProductSerializer(product, many=True)
+    return Response(serializer.data)
 
 
 @api_view(['GET'])
 def getProduct(request,pk):
-    product = None
-    for p in products:
-        if p['_id'] == pk:
-            product = p
-    return Response(product)
+    product = Product.objects.get(_id=pk)
+    serializer = ProductSerializer(product)
+    return Response(serializer.data)
