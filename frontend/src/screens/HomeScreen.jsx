@@ -33,7 +33,8 @@ function HomeScreen() {
       {loading ? (
         <Spinner
           animation="border"
-          style={{ width: "3rem", height: "3rem", margin: "auto" }}
+          style={{ width: "3rem", height: "3rem", margin: "auto"}}
+          className="d-flex text-center"
         />
       ) : error ? (
         <Message>{error}</Message>
