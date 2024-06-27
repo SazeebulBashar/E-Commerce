@@ -4,6 +4,8 @@ import { useParams, Link } from 'react-router-dom';
 import { Button, Card, Col, Form, Image, ListGroup, Row } from 'react-bootstrap';
 import Rating from '../components/Rating';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { increment } from '../features/cart/cartSlice';
 
 function ProductScreeen() {
 
@@ -12,6 +14,12 @@ function ProductScreeen() {
     const { id } = useParams();
     const [product, setProduct] = useState([]);
     
+
+
+    const cart = useSelector(state => state.cart.value);
+    const dispatch = useDispatch();
+
+
     useEffect(() => {
         async function fetchProduct() {
             const { data } = await axios.get(`http://127.0.0.1:8000/api/products/${id}`);
@@ -21,7 +29,9 @@ function ProductScreeen() {
     },[]);
 
     const addToCartHandler = () => {
-        <Link to={`/cart/${id}?qty=${qty}`} />;
+        dispatch(increment());
+        // <Link to={`/cart/${id}?qty=${qty}`} />;
+        
 
     }
 
@@ -97,7 +107,7 @@ function ProductScreeen() {
 
                         <ListGroup.Item>
         
-                            <Link to={`/cart/${id}?qty=${qty}`} className='btn btn-dark btn-block' type='button' disabled={product.countInStock === 0}>
+                            <Link onClick={addToCartHandler} to={`/cart/${id}/${qty}`} className='btn btn-dark btn-block' type='button' disabled={product.countInStock === 0}>
                                 Add To Cart
                             </Link>
                             
