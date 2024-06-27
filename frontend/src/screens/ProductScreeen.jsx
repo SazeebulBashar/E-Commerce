@@ -5,7 +5,7 @@ import { Button, Card, Col, Form, Image, ListGroup, Row } from 'react-bootstrap'
 import Rating from '../components/Rating';
 import axios from 'axios';
 
-function ProductScreeen({history}) {
+function ProductScreeen() {
 
     const [qty, setQty] = useState(1); 
 
@@ -21,7 +21,8 @@ function ProductScreeen({history}) {
     },[]);
 
     const addToCartHandler = () => {
-        history.push(`/cart/${id}?qty=${qty}`);
+        <Link to={`/cart/${id}?qty=${qty}`} />;
+
     }
 
   return (
@@ -95,9 +96,11 @@ function ProductScreeen({history}) {
                         )}
 
                         <ListGroup.Item>
-                            <Button onClick={addToCartHandler} className='btn-block' type='button' disabled={product.countInStock === 0}>
+        
+                            <Link to={`/cart/${id}?qty=${qty}`} className='btn btn-dark btn-block' type='button' disabled={product.countInStock === 0}>
                                 Add To Cart
-                            </Button>
+                            </Link>
+                            
                         </ListGroup.Item>
                     </ListGroup>
                 </Card>
