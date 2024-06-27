@@ -7,8 +7,7 @@ function CartScreen() {
   const {id,qty} = useParams();
   return (
     <>
-      <h1>Items : {cart} </h1>
-      <h1>ID : {id} qty : {qty} </h1>
+      <div>ID: {id}, Quantity: {qty} </div>
     </>
   )
 }
