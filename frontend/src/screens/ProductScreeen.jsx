@@ -5,7 +5,9 @@ import { Button, Card, Col, Form, Image, ListGroup, Row } from 'react-bootstrap'
 import Rating from '../components/Rating';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { increment } from '../features/cart/cartSlice';
+// import { increment } from '../features/cart/cartSlice';
+import {addToCart} from '../features/cartitems/CartitemSlice';
+
 
 function ProductScreeen() {
 
@@ -16,7 +18,7 @@ function ProductScreeen() {
     
 
 
-    const cart = useSelector(state => state.cart.value);
+    const cartitems = useSelector(state => state.cartitems);
     const dispatch = useDispatch();
 
 
@@ -29,7 +31,7 @@ function ProductScreeen() {
     },[]);
 
     const addToCartHandler = () => {
-        dispatch(increment());
+        dispatch(addToCart(product));
         // <Link to={`/cart/${id}?qty=${qty}`} />;
         
 
